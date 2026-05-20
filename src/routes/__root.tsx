@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import favicon from "@/assets/tradewall-logo.jpg?url";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -124,6 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster richColors position="top-center" />
     </QueryClientProvider>
   );
 }

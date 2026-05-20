@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import favicon from "@/assets/tradewall-logo.jpg?url";
 
 function NotFoundComponent() {
   return (
@@ -85,6 +86,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        href: favicon,
+        type: "image/jpeg",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: favicon,
       },
     ],
   }),

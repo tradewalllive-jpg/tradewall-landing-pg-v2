@@ -4,11 +4,12 @@ import AOS from "aos";
 import {
   Home, BarChart3, Bell, Brain, BookOpen, LineChart, Copy, Radio,
   Megaphone, CreditCard, DollarSign, Server, ArrowRight, Check,
-  TrendingUp, Sparkles, ShieldCheck, Zap, Users, Bot,
+  TrendingUp, Sparkles, ShieldCheck, Zap, Users, Bot, ChevronDown, ChevronUp,
 } from "lucide-react";
 import { DonationWidget } from "@/components/DonationWidget";
 import { LandingFooter } from "@/components/LandingFooter";
 import { LandingNav } from "@/components/LandingNav";
+import { useIsMobile } from "@/hooks/use-mobile";
 import logo from "@/assets/tradewall-logo.jpg";
 import screenFeed from "@/assets/screen-feed.png";
 import screenPost from "@/assets/screen-post.png";
@@ -127,7 +128,13 @@ function Hero() {
   );
 }
 
+const FEATURES_INITIAL_DESKTOP = 8;
+const FEATURES_INITIAL_MOBILE = 3;
+
 function FeatureGrid() {
+  const isMobile = useIsMobile();
+  const [showAll, setShowAll] = useState(false);
+  const initialCount = isMobile ? FEATURES_INITIAL_MOBILE : FEATURES_INITIAL_DESKTOP;
   const features = [
     { icon: Home, title: "Feed", desc: "Trader-only social timeline." },
     { icon: BarChart3, title: "Dashboard", desc: "Balance, equity, ROI live." },
@@ -142,6 +149,9 @@ function FeatureGrid() {
     { icon: Server, title: "APIs", desc: "MT4/MT5 account linking." },
     { icon: ShieldCheck, title: "Verified Badge", desc: "TradeWall Pro credibility." },
   ];
+  const hasMore = features.length > initialCount;
+  const visibleFeatures = showAll ? features : features.slice(0, initialCount);
+
   return (
     <section id="features" className="py-28 bg-tw-2 relative">
       <div className="max-w-7xl mx-auto px-6">
@@ -158,7 +168,7 @@ function FeatureGrid() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {features.map((f, i) => (
+          {visibleFeatures.map((f, i) => (
             <div
               key={f.title}
               data-aos="fade-up"
@@ -173,6 +183,29 @@ function FeatureGrid() {
             </div>
           ))}
         </div>
+
+        {hasMore && (
+          <div className="mt-10 flex justify-center" data-aos="fade-up">
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="inline-flex items-center gap-2 tw-card text-white px-6 py-3 rounded-full font-medium hover:border-white/20 transition"
+              aria-expanded={showAll}
+            >
+              {showAll ? (
+                <>
+                  Show fewer features
+                  <ChevronUp className="w-4 h-4 text-tw-blue" />
+                </>
+              ) : (
+                <>
+                  View all {features.length} features
+                  <ChevronDown className="w-4 h-4 text-tw-blue" />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

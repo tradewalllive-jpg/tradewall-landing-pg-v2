@@ -125,4 +125,90 @@
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   }
+
+  @keyframes nav-menu-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes nav-menu-backdrop-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes nav-menu-panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.75rem) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes nav-menu-panel-out {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-0.5rem) scale(0.99);
+    }
+  }
+  @keyframes nav-menu-item-in {
+    from {
+      opacity: 0;
+      transform: translate3d(-0.5rem, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes nav-menu-item-out {
+    from {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      opacity: 0;
+      transform: translate3d(0.25rem, 0, 0);
+    }
+  }
+
+  .nav-menu-backdrop-open {
+    animation: nav-menu-backdrop-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .nav-menu-backdrop-closed {
+    animation: nav-menu-backdrop-out 0.24s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+  .nav-menu-panel-open {
+    animation: nav-menu-panel-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: top center;
+  }
+  .nav-menu-panel-closed {
+    animation: nav-menu-panel-out 0.28s cubic-bezier(0.4, 0, 1, 1) forwards;
+    transform-origin: top center;
+  }
+  .nav-menu-item-open {
+    opacity: 0;
+    animation: nav-menu-item-in 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(72ms + var(--nav-item-delay, 0ms));
+  }
+  .nav-menu-item-closed {
+    animation: nav-menu-item-out 0.18s cubic-bezier(0.4, 0, 1, 1) forwards;
+    animation-delay: calc(var(--nav-item-delay, 0ms) * 0.35);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-menu-backdrop-open,
+    .nav-menu-backdrop-closed,
+    .nav-menu-panel-open,
+    .nav-menu-panel-closed,
+    .nav-menu-item-open,
+    .nav-menu-item-closed {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 }

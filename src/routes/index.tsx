@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const SIGNIN_URL = "https://www.tradewall.live/login";
-const SIGNUP_URL = "https://tradewall.live/login?tab=signup";
+const SIGNIN_URL = "https://app.tradewall.live/login";
+const SIGNUP_URL = "https://app.tradewall.live/login?tab=signup";
 
 function Nav() {
   return (
